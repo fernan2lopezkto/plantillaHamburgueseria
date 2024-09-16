@@ -21,7 +21,7 @@ import Servicios from "./components/Servicios";
 import About from "./components/About";
 
 import ProductTable from "./components/ProductTable"
-import CsvFetcher from "./components/CsvFetcher";
+
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./themes/themeHam"; // Importa el tema

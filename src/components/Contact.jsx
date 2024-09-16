@@ -53,7 +53,7 @@ function Contact() {
                 (window.location.href =
                   "https://wa.me/598" +
                   clientData.phone +
-                  "?text=Hola.%20%20%20vengo%20de%20la%20plantilla%20web%20de%20pastelería%2C%20me%20gustaría%20tener%20más%20información%20por%20favor.%20Gracias")
+                  "?text=Hola.%20%20%20vengo%20de%20la%20plantilla%20web%20de%20hamburgueseria%2C%20me%20gustaría%20tener%20más%20información%20por%20favor.%20Gracias")
               }
             >
               <WhatsApp sx={{ display: { xs: "flex" }, fontSize: 50, mr: 1 }} />
