@@ -15,19 +15,19 @@ const texts = {
       name: "Clásica Doble",
       description: "Nuestra Clásica Doble es una combinación perfecta de sabor y simplicidad. Dos jugosas carnes a la parrilla, queso cheddar derretido, lechuga fresca, tomate y nuestra salsa secreta, todo en un suave pan brioche.",
       precio: "$950",
-      img: "/esp/doble.png"
+      img: "/plantillaHamburgueseria/esp/doble.png"
     },
     {
       name: "BBQ Especial",
       description: "La BBQ Especial es un sueño hecho realidad para los amantes de la barbacoa. Una carne jugosa, tocino crujiente, queso cheddar, cebolla caramelizada y salsa BBQ ahumada, servida en un pan brioche tostado.",
       precio: "$1100",
-      img: "/esp/BBQEspecial.png"
+      img: "/plantillaHamburgueseria/esp/BBQEspecial.png"
     },
     {
       name: "Veggie Deluxe",
       description: "Nuestra Veggie Deluxe ofrece una deliciosa opción vegetariana con un patty de garbanzos, espinaca y zanahoria, acompañada de aguacate fresco, tomate, lechuga y una mayonesa vegana en pan integral.",
       precio: "$800",
-      img: "/esp/VeggieDeluxe.png"
+      img: "/plantillaHamburgueseria/esp/VeggieDeluxe.png"
     }
   ],
 
