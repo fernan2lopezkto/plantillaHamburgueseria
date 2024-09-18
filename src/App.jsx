@@ -1,30 +1,52 @@
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+// MUI FONTS
+import "@fontsource/montserrat";
 
-import '@fontsource/montserrat';
+// PAGES
+import NotFound from "./pages/NotFound.jsx";
+import ErrorPage from "./pages/Error-page";
 
-import AlertPlantilla from "./components/AlertPlantilla";
-import ResponsiveAppBar from "./components/AppBar";
-
-import Home from "./components/Home";
-
-import Especialidad from "./components/Especialidad";
-import Footer from "./components/Footer";
-import Contact from "./components/Contact";
-
-
+// COMPONENTES
 import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
-import Servicios from "./components/Servicios";
-
+import ResponsiveAppBar from "./components/AppBar";
+import AlertPlantilla from "./components/AlertPlantilla";
+import ProductTable from "./components/ProductTable";
+import Especialidad from "./components/Especialidad";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import About from "./components/About";
+import Home from "./pages/Home.jsx";
 
-import ProductTable from "./components/ProductTable"
-
-
+// THEME
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./themes/themeHam"; // Importa el tema
+
+// ROUTER
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+const routes = [
+  {
+    path: "/plantillaHamburgueseria",
+    element: <Home />,
+    errorElement: <ErrorPage />,
+  },
+
+  {
+    path: "/plantillaHamburgueseria/contact",
+    element: <Contact />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/plantillaHamburgueseria/ProductTable",
+    element: <ProductTable />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/cuatro-cuerdas/*",
+    element: <NotFound />,
+    errorElement: <ErrorPage />,
+  },
+];
+const router = createBrowserRouter(routes);
+
 
 
 function App() {
@@ -32,15 +54,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
       <AlertPlantilla />
-      {/* <CsvFetcher /> */}
-      <Home />
-      <Especialidad />
-      <ProductTable />
-      <PreguntasFrecuentes />
-      {/* <Servicios /> */}
-      <About />
-      <Contact />
-      <Footer /> 
+      <RouterProvider router={router} />
+      <Footer />
     </ThemeProvider>
   );
 }

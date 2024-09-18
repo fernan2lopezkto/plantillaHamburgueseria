@@ -3,9 +3,11 @@ import Grid from '@mui/material/Grid2';
 import { motion } from "framer-motion";
 import fondo from "../assets/mid/ham4.png";
 import texts from "../data/texts";
+import Especialidad from "../components/Especialidad";
 
 function Home() {
   return (
+    <>
     <div
       style={{
         backgroundImage: `url(${fondo})`,
@@ -13,7 +15,7 @@ function Home() {
         backgroundSize: "cover",
         backgroundColor: "#000000",
       }}
-    >
+      >
       <div style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         <Container
           sx={{
@@ -33,13 +35,7 @@ function Home() {
               justifyContent="center"
               alignItems="center"
               spacing={2}
-              
             >
-              {/* <Grid item size={12}>
-                <Typography variant="h6" component="p" textAlign="center">
-                  {texts.welcomeMessage}
-                </Typography>
-              </Grid> */}
               <Grid size={12}>
                 <Typography variant="h2" component="h1" textAlign="center">
                   {texts.title}
@@ -55,6 +51,8 @@ function Home() {
         </Container>
       </div>
     </div>
+    <Especialidad />
+      </>
   );
 }
 

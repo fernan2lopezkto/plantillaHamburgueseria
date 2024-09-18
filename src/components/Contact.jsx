@@ -19,7 +19,7 @@ function Contact() {
       id="contacto"
       maxWidth={false}
       sx={{
-        minHeight: "40vh",
+        minHeight: "80vh",
         //backgroundColor: theme.palette.primary.main,
         display: "flex",
         justifyContent: "center",
