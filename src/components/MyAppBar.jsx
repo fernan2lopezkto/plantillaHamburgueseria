@@ -26,7 +26,7 @@ const pages = [
   { name: "Contacto", id: "contacto" },
 ];
 
-function ResponsiveAppBar() {
+function MyAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -191,4 +191,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default MyAppBar;

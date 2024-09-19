@@ -6,7 +6,9 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <div id="error-page">
+    <div id="error-page" style={{
+        minHeight: '90vh'
+    }}>
 
       <h1>Oops!</h1>
       <p>Perdon, ocurrio un error inesperado.</p>
