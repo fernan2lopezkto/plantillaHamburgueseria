@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -8,9 +9,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import { useTheme } from '@mui/material/styles';
-import texts from '../data/texts';
+//import texts from '../data/texts';
 
-function Especialidad() {
+function Especialidad({texts}) {
   const theme = useTheme();
 
   return (
@@ -39,7 +40,7 @@ function Especialidad() {
           return (
             <Grid  size={{ xs: 9, sm: 6, md: 5 }} key={index} justifyContent="center" alignItems="center" mb={4}>
               <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea href="#menu">
+                <CardActionArea component={Link} to="/plantillahamburgueseria/menu">
                   <CardMedia
                     component="img"
                     height="200"

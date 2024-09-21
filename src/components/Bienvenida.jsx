@@ -2,11 +2,11 @@ import { Container, Typography } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import { motion } from "framer-motion";
 import fondo from "../assets/mid/ham4.png";
-import texts from "../data/texts";
 
 
 
-function Bienvenida() {
+
+function Bienvenida({texts}) {
   return (
     <>
     <div

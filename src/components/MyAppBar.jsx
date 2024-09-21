@@ -1,4 +1,7 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
+
+// MUI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,7 +12,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-
 import Instagram from "@mui/icons-material/Instagram";
 import { WhatsApp } from "@mui/icons-material";
 
@@ -18,12 +20,10 @@ import clientData from "../data/clientData";
 import logoPrincipal from "/logoburguer.webp";
 
 const pages = [
-  { name: "Especialidad", id: "especialidad" },
-  //{ name: "Servicios", id: "servicios" },
-  //  { name: "Restaurant", id: "restaurant" },
-  //  { name: 'Servicios', id: 'servicios' },
-  { name: 'Menu', id: 'menu' },
-  { name: "Contacto", id: "contacto" },
+  { name: "Home", id: "/plantillahamburgueseria" },
+  { name: "Menu", id: "/plantillahamburgueseria/menu" },
+  {name: "About", id: "/plantillahamburgueseria/about"},
+  { name: "Contacto", id: "/plantillahamburgueseria/contact" },
 ];
 
 function MyAppBar() {
@@ -44,7 +44,7 @@ function MyAppBar() {
           <Box sx={{ display: { xs: "none", md: "flex" }, height: 30, mr: 1 }}>
             <img src={logoPrincipal} className="logo" alt="Vite logo" />
           </Box>
-          {/* <Typography
+          <Typography
             variant="h4"
             noWrap
             component="a"
@@ -62,7 +62,7 @@ function MyAppBar() {
             }}
           >
             {clientData.companyName}
-          </Typography> */}
+          </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -105,15 +105,14 @@ function MyAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography
-                    component="a"
-                    color="inherit"
-                    href={`#${page.id}`}
-                    textAlign="center"
-                    sx={{ width: "100%" }} // Asegura que cada elemento ocupe el 100% del menú
+                  <NavLink
+                    to={`${page.id}`}
+                    style={{ textDecoration: "none", width: "100%" }}
                   >
-                    {page.name}
-                  </Typography>
+                    <Typography color="inherit" textAlign="center">
+                      {page.name}
+                    </Typography>
+                  </NavLink>
                 </MenuItem>
               ))}
               <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
@@ -170,19 +169,23 @@ function MyAppBar() {
             }}
           >
             {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "inherit",
-                  display: "block",
-                  fontFamily: "Mooli, Arial, sans-serif",
-                }}
-                href={`#${page.id}`}
-              >
-                {page.name}
-              </Button>
+               <NavLink
+               key={page.name}
+               to={page.id}
+               style={{ textDecoration: "none", color: "inherit" }} // Estilos para remover subrayado y mantener color
+             >
+               <Button
+                 onClick={handleCloseNavMenu}
+                 sx={{
+                   my: 2,
+                   color: "inherit",
+                   display: "block",
+                   fontFamily: "Mooli, Arial, sans-serif",
+                 }}
+               >
+                 {page.name}
+               </Button>
+             </NavLink>
             ))}
           </Box>
         </Toolbar>

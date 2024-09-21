@@ -8,9 +8,9 @@ import { WhatsApp } from "@mui/icons-material";
 
 import useTheme from "@mui/material/styles/useTheme";
 
-import clientData from "../data/clientData";
+//import clientData from "../data/clientData";
 
-function Contact() {
+function Contact({clientData}) {
   const theme = useTheme();
 
   return (

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importar el hook useNavigate
 import papa from "papaparse";
 import {
   Card,
@@ -12,7 +13,13 @@ import Grid from "@mui/material/Grid2";
 const url =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGfjIyNVUnYeN03aB059xGJOkzD5p_yvIFKDWxhAsa5DC6q1cup0AbA16iIAS1oj-iU2eZ7gHFyORQ/pub?gid=0&single=true&output=csv";
 
+// Función para transformar los espacios en guiones
+const transformPath = (name) => name.replace(/\s+/g, "-").toLowerCase();
+
 function ProductTable() {
+  const navigate = useNavigate(); // Inicializar el hook useNavigate
+  const [data, setData] = useState([]);
+
   const transformGoogleDriveLink = (link) => {
     const fileIdMatch = link.match(/[-\w]{25,}/);
     if (fileIdMatch) {
@@ -26,8 +33,6 @@ function ProductTable() {
     }
   };
 
-  const [data, setData] = useState([]);
-
   useEffect(() => {
     fetch(url)
       .then((response) => response.text())
@@ -37,6 +42,12 @@ function ProductTable() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // Función para manejar el click en un producto
+  const handleProductClick = (productName) => {
+    const path = transformPath(productName); // Convertir el nombre en URL amigable
+    navigate(`/plantillahamburgueseria/menu/${path}`); // Navegar a la página del producto
+  };
 
   return (
     <Grid container justifyContent="center" alignItems="center" spacing={4} id="menu">
@@ -54,7 +65,7 @@ function ProductTable() {
       {data.map((ham, index) => (
         <Grid size={{ xs: 9, sm: 4, md: 3 }} key={index}>
           <Card>
-            <CardActionArea>
+            <CardActionArea onClick={() => handleProductClick(ham.nombre)}> {/* Manejar clic en el producto */}
               {ham.imagen && (
                 <CardMedia
                   component="img"

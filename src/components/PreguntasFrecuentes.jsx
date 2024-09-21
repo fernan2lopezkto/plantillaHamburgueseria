@@ -5,13 +5,13 @@ import { useState } from "react";
 import { Container, Typography } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 
-import texts from "../data/texts";
+//import texts from "../data/texts";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 
-function PreguntasFrecuentes() {
+function PreguntasFrecuentes({texts}) {
   const [current, setCurrent] = useState(-1);
 
   const changeState = (panel) => (e, newValue) => {

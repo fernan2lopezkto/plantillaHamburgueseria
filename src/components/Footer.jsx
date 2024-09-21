@@ -19,7 +19,7 @@ function Footer() {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="h6">
+            <Typography variant="h6" fontSize={12}>
               <a
                 href={clientData.website}
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -29,7 +29,7 @@ function Footer() {
             </Typography>
           </Box>
           <Box>
-            <Fab variant="extended" onClick={handleClick}>
+            <Fab variant="extended" onClick={handleClick} sx={{height: '5'}}>
               <NavigationIcon />
             </Fab>
           </Box>

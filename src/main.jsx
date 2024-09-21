@@ -5,60 +5,109 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./themes/themeHam"; // Importa el tema
 
 // GENERAL IMPORTS
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 //import App from "./App.jsx";
 import { CssBaseline } from "@mui/material";
+import papa from "papaparse";
 
 // PAGES
-import NotFound from "./pages/NotFound.jsx";
+import HomePage from "./pages/Home-page.jsx";
 import ErrorPage from "./pages/Error-page";
+import NotFound from "./pages/NotFound.jsx";
+import ContactPage from "./pages/Contact-page.jsx";
+import MenuPage from "./pages/Menu-page.jsx";
+import AboutPage from "./pages/About-page.jsx";
+import ProductPage from "./pages/ProductPage"; // Página para mostrar cada producto
 // COMPONENTES
-import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
-import ResponsiveAppBar from "./components/MyAppBar.jsx";
 import AlertPlantilla from "./components/AlertPlantilla";
-import ProductTable from "./components/ProductTable";
-import Especialidad from "./components/Especialidad";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import About from "./components/About";
-import Home from "./pages/Home.jsx";
 
 // ROUTER
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-const routes = [
-  {
-    path: "/plantillaHamburgueseria",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
 
-  {
-    path: "/plantillaHamburgueseria/contact",
-    element: <Contact />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/plantillaHamburgueseria/ProductTable",
-    element: <ProductTable />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/cuatro-cuerdas/*",
-    element: <NotFound />,
-    errorElement: <ErrorPage />,
-  },
-];
-const router = createBrowserRouter(routes);
+const url =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGfjIyNVUnYeN03aB059xGJOkzD5p_yvIFKDWxhAsa5DC6q1cup0AbA16iIAS1oj-iU2eZ7gHFyORQ/pub?gid=0&single=true&output=csv";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <CssBaseline>
-      <ThemeProvider theme={theme}>
-        <AlertPlantilla />
-        <RouterProvider router={router} />
-        <Footer />
-      </ThemeProvider>
-    </CssBaseline>
-  </React.StrictMode>
-);
+// Función para transformar los espacios en guiones
+const transformPath = (name) => name.replace(/\s+/g, "-").toLowerCase();
+
+function Main() {
+  const [routes, setRoutes] = useState([]);
+
+  useEffect(() => {
+    // Hacer el fetch a Google Sheets y generar rutas dinámicamente
+    fetch(url)
+      .then((response) => response.text())
+      .then((data) => {
+        const parsedData = papa.parse(data, { header: true }).data;
+
+        // Rutas estáticas
+        const staticRoutes = [
+          {
+            path: "/plantillaHamburgueseria",
+            element: <HomePage />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "/plantillaHamburgueseria/contact",
+            element: <ContactPage />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "/plantillaHamburgueseria/about",
+            element: <AboutPage />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "/plantillaHamburgueseria/menu",
+            element: <MenuPage />,
+            errorElement: <ErrorPage />,
+          },
+        ];
+
+        // Generar rutas dinámicas para cada producto en el menú
+        const dynamicRoutes = parsedData.map((item) => {
+          const path = transformPath(item.nombre); // Convertir el nombre en URL amigable
+          return {
+            path: `/plantillahamburgueseria/menu/${path}`,
+            element: <ProductPage product={item} />, // Página individual para cada producto
+            errorElement: <ErrorPage />,
+          };
+        });
+
+        // Añadir la ruta de NotFound
+        staticRoutes.push({
+          path: "/plantillahamburgueseria/*",
+          element: <NotFound />,
+          errorElement: <ErrorPage />,
+        });
+
+        // Establecer las rutas combinando estáticas y dinámicas
+        setRoutes([...staticRoutes, ...dynamicRoutes]);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // Mientras no se han cargado las rutas, muestra un mensaje de carga
+  if (routes.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  // Crear el enrutador con las rutas cargadas
+  const router = createBrowserRouter(routes);
+
+  return (
+    <React.StrictMode>
+      <CssBaseline>
+        <ThemeProvider theme={theme}>
+          <AlertPlantilla />
+          <RouterProvider router={router} />
+          <Footer />
+        </ThemeProvider>
+      </CssBaseline>
+    </React.StrictMode>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Main />);
