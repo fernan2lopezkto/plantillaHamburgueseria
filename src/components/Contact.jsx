@@ -34,7 +34,12 @@ function Contact({clientData}) {
         pt={2}
         pb={6}
       >
-        <Grid xs={12} sm={6} md={4} sx={{ textAlign: "center" }}>
+        {/* <Grid size={12}>
+          <Typography variant="h2" component="p" textAlign="center">
+            {clientData.companyName}
+          </Typography>
+        </Grid> */}
+        <Grid size={{ xs:12, sm:6, md:6 }} sx={{ textAlign: "center" }}>
           <Typography variant="h4" mt={2}>
             Contacto
           </Typography>
@@ -72,12 +77,7 @@ function Contact({clientData}) {
             </Button>
           </Box>
         </Grid>
-        <Grid xs={12} sm={6} md={4}>
-          <Typography variant="h2" component="p" textAlign="center">
-            {clientData.companyName}
-          </Typography>
-        </Grid>
-        <Grid xs={12} sm={6} md={4} textAlign="center">
+        <Grid size={{ xs:12, sm:6, md:6 }} sx={{ textAlign: "center" }}>
           <Typography variant="h4" textAlign="center">
             Ubicacion
           </Typography>
